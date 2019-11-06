@@ -41,6 +41,8 @@ if (isset(($_POST['regSub']))) {
 
 <form method="post">
   <div>
+    <label>Role</label>
+    <br>
     <select class="role" name="role">
       <option>Patient</option>
       <option>Doctor</option>
