@@ -1,5 +1,6 @@
 <?php
-
+include 'logout.php';
+include 'db.php';
  ?>
 
  <!DOCTYPE html>
@@ -9,6 +10,7 @@
      <title></title>
    </head>
    <body>
+
      <main>
        <header>
            <nav>
