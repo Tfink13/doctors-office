@@ -1,20 +1,7 @@
 <?php
-require 'db.php';
+require "dbregister.php";
 
-
-
-if (isset(($_POST['regSub']))) {
-  $role = $_POST['role'] ?? null;
-  $fname = $_POST['fName'] ?? null;
-  $lname = $_POST['lName'] ?? null;
-  $email = $_POST['email'] ?? null;
-  $pass = $_POST['password'] ?? null;
-  $phone = $_POST['phone'] ?? null;
-  $dob = $_POST['dob'] ?? null;
-
-}
-
- ?>
+?>
 
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -36,7 +23,7 @@ if (isset(($_POST['regSub']))) {
       </header>
     </main>
 
-<form method="post">
+<form method="post" action="#">
   <div>
     <label>Role</label>
     <br>
@@ -73,7 +60,7 @@ if (isset(($_POST['regSub']))) {
         <input type="text" name="dob" required>
       </div>
       <div class="regsub">
-      <button type="submit" name="sub">Submit</button>
+      <button type="submit" name="submit">Submit</button>
       </div>
 
 </form>
