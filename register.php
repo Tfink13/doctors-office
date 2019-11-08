@@ -1,19 +1,14 @@
 <?php
-
-
+require "dbregister.php";
 
 if (isset(($_POST['regSub']))) {
-  $role = $_POST['role'];
-  $fname = $_POST['fName'];
-  $lname = $_POST['lName'];
-
-  $email = $_POST['email'];
-  $pass = $_POST['password'];
-  $phone = $_POST['phone'];
-  $dob = $_POST['dob'];
-  $family_code = $_POST['fc'];
-  $econ = $_POST['econ'];
-  $rel_to_emer = $_POST['rele'];
+  $role = $_POST['role'] ?? null;
+  $fname = $_POST['fName'] ?? null;
+  $lname = $_POST['lName'] ?? null;
+  $email = $_POST['email'] ?? null;
+  $pass = $_POST['password'] ?? null;
+  $phone = $_POST['phone'] ?? null;
+  $dob = $_POST['dob'] ?? null;
 
 }
 
