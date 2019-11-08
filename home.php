@@ -4,6 +4,7 @@ include 'db_connect.php';
 
 $email = $password = "";
 $username_err = $password_err = "";
+$role = $_POST['role']
 
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -42,9 +43,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 // Check if username exists, if yes then verify password
                 if(mysqli_stmt_num_rows($stmt) == 1){
                     // Bind result variables
-                    mysqli_stmt_bind_result($stmt, $user_id, $email, $hashed_password);
+                    mysqli_stmt_bind_result($stmt, $user_id, $email, $password);
                     if(mysqli_stmt_fetch($stmt)){
-                        if(password_verify($password, $hashed_password)){
+                        if ($password == $password) {
                             // Password is correct, so start a new session
                             session_start();
 
@@ -52,6 +53,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             $_SESSION["loggedin"] = true;
                             $_SESSION["id"] = $user_id;
                             $_SESSION["email"] = $email;
+
+
 
                             // Redirect user to welcome page
                             header("location: welcome.php");
@@ -91,7 +94,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <div class="wrapper">
         <h2>Login</h2>
         <p>Please fill in your credentials to login.</p>
-        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+        <form method="post">
             <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
                 <label>Username</label>
                 <input type="text" name="email" class="form-control" value="<?php echo $email; ?>">
@@ -108,10 +111,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             <p>Don't have an account? <a href="register.php">Sign up now</a>.</p>
         </form>
     </div>
-    <form class="" action="register.php" method="post">
-        <button type="register" name="register">Register</button>
-    </form>
-
 
   </body>
 </html>
