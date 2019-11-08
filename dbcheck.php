@@ -1,4 +1,4 @@
-<?php 
+<?php
 require "db.php";
 
 
@@ -36,7 +36,7 @@ if ($form_data) {
            First Name <input input type="text" name="fName">
            Last Name <input type="text" name="lName">
            Email <input type="text" name="email">
-          Phone: <input type="text" name="phone">
+           Phone: <input type="text" name="phone">
             Password: <input type="text" name="password">
             Date of Birth: <input type="text" name="dob">
             <input type="submit">
