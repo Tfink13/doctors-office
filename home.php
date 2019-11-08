@@ -51,7 +51,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             // Store data in session variables
                             $_SESSION["loggedin"] = true;
                             $_SESSION["id"] = $user_id;
-                            $_SESSION["username"] = $username;
+                            $_SESSION["email"] = $email;
 
                             // Redirect user to welcome page
                             header("location: welcome.php");
@@ -88,20 +88,30 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <title></title>
   </head>
   <body>
-    <h1>
-      HOMEPAGE
-    </h1>
-    <form class="" method="post">
-      <label>Email</label>
-      <input type="text" name="email">
-      <label>Password</label>
-      <input type="text" name="password">
-      <button type="submit" name="login">Log in</button>
-    </form>
-
+    <div class="wrapper">
+        <h2>Login</h2>
+        <p>Please fill in your credentials to login.</p>
+        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+            <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
+                <label>Username</label>
+                <input type="text" name="email" class="form-control" value="<?php echo $email; ?>">
+                <span class="help-block"><?php echo $username_err; ?></span>
+            </div>
+            <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
+                <label>Password</label>
+                <input type="password" name="password" class="form-control">
+                <span class="help-block"><?php echo $password_err; ?></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary" value="Login">
+            </div>
+            <p>Don't have an account? <a href="register.php">Sign up now</a>.</p>
+        </form>
+    </div>
     <form class="" action="register.php" method="post">
         <button type="register" name="register">Register</button>
     </form>
+
 
   </body>
 </html>
