@@ -1,5 +1,6 @@
-
-
+<?php
+require "login.php";
+?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -11,11 +12,11 @@
     <h1>
       HOMEPAGE
     </h1>
-    <form class="" method="post">
+    <form action="#" class="" method="post">
       <label>Email</label>
       <input type="text" name="email">
       <label>Password</label>
-      <input type="text" name="password">
+      <input type="text" name="pass">
       <button type="submit" name="login">Log in</button>
     </form>
 

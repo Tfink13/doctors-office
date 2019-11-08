@@ -14,9 +14,8 @@ $form_data = array(
     'approved' => false
 ) ?? null;
 
-$tablename = "users";
 
 if (isset($form_data)) {
-    $result = dbInsert($conn, $tablename, $form_data);
+    $result = dbInsert($conn, "users", $form_data);
 }
 ?>

@@ -1,6 +1,6 @@
 <?php require "db_connect.php";
 
-// get form data from form post and insert it
+// get form data from from post and insert it
 function dbInsert($conn, $table_name, $form_data) {
     $fields = array_keys($form_data);
     $sql = "INSERT INTO ".$table_name."
@@ -9,6 +9,8 @@ function dbInsert($conn, $table_name, $form_data) {
     return mysqli_query($conn, $sql);
 };
 
+
+// get form data from post and delete it
 function dbDelete($conn, $table_name, $where_clause='') {
 $where = '';
 if(!empty($where_clause))
