@@ -1,3 +1,15 @@
+div {
+  padding: 12px;
+}
+
+h1 {
+  clear: both;
+}
+
+form {
+    width: 300px;
+    margin: 0 auto;
+}
 
 input {
   display: block;
@@ -6,8 +18,8 @@ input {
 }
 
 textarea:focus, input:focus, input[type]:focus, .uneditable-input:focus {
-    border-color: rgba(229, 103, 23, 0.8);
-    box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px rgba(229, 103, 23, 0.6);
+    border-color: lightblue;
+    box-shadow: 0 1px 1px lightblue inset, 0 0 8px lightblue;
     outline: 0 none;
 }
 
@@ -42,4 +54,10 @@ header li {
 header li a {
       color: black;
       text-decoration: none;
+}
+
+button.sub {
+  height: 50px;
+    width: 152px;
+    border-radius: 20px;
 }

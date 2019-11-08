@@ -1,6 +1,6 @@
 <?php
-require "auth.php";
-?>
+require 'logout.php'; 
+ ?>
 
 
  <!DOCTYPE html>

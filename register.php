@@ -1,5 +1,7 @@
 <?php
-require "dbregister.php";
+require 'db.php';
+
+
 
 if (isset(($_POST['regSub']))) {
   $role = $_POST['role'] ?? null;
@@ -70,7 +72,10 @@ if (isset(($_POST['regSub']))) {
         <label>Date of Birth</label>
         <input type="text" name="dob" required>
       </div>
-      <button type="submit" name="regSub">Submit</button>
+      <div class="regsub">
+      <button type="submit" name="sub">Submit</button>
+      </div>
+
 </form>
 
 
