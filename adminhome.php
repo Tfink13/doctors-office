@@ -1,31 +1,38 @@
 <?php
-include 'logout.php';
+
 include 'db.php';
+
+if (isset(($_POST['logout']))) {
+  unset($_SESSION["userid"]);
+  header("Location: home.php");
+}
  ?>
 
  <!DOCTYPE html>
  <html lang="en" dir="ltr">
    <head>
+     <link rel="stylesheet" href="master.css">
      <meta charset="utf-8">
      <title></title>
    </head>
    <body>
+     <div class="header">
 
-     <main>
-       <header>
-           <nav>
-               <ul>
-                   <li><a href="adminhome.php"> Home </a></li>
-                   <li><a href="ademployees.php"> Employees </a></li>
-                   <li><a href="adpatients.php"> Patients </a></li>
-                   <li><a href="adroster.php"> Roster </a></li>
-                   <li><a href="apreg.php"> Approve Registrations </a></li>
-                   <li><a href="adcaregivers.php"> Caregivers </a></li>
-                   <li><a href="adfamily.php"> Contacts for Patients </a></li>
-                   <li><a href="adpayment.php"> Payment History </a></li>
-               </ul>
-           </nav>
-       </header>
-     </main>
+
+       <div class="dropdown menu">
+         <button class="dropbtn">Menu</button>
+         <div class="dropdown-content">
+           <a href="home.php"><li>Home</li></a>
+           <a href="#"><li>About</li></a>
+           <a href="#"><li>Contact</li></a>
+       </div>
+
+       </div>
+       <h1>Doctor Josh </h1>
+       <form class="x" action="home.php" method="post">
+         <button class="x" type="submit" name="logout"><li style="list-style: none;">Logout</li></button>
+       </form>
+
+     </div>
    </body>
  </html>

@@ -1,32 +1,35 @@
 <?php
-session_start();
+
 include 'db_connect.php';
 
 $email = $password = "";
 $username_err = $password_err = "";
-$role = $_POST['role']
+$role = "";
+
+
 
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
 
     // Check if username is empty
-    if(empty(trim($_POST["email"]))){
+    if(empty(trim(@$_POST["email"]))){
         $username_err = "Please enter username.";
     } else{
         $email = trim($_POST["email"]);
     }
 
     // Check if password is empty
-    if(empty(trim($_POST["password"]))){
+    if(empty(trim(@$_POST["password"]))){
         $password_err = "Please enter your password.";
     } else{
         $password = trim($_POST["password"]);
+
     }
 
     // Validate credentials
     if(empty($username_err) && empty($password_err)){
         // Prepare a select statement
-        $sql = "SELECT user_id, email, password FROM users WHERE email = ?";
+        $sql = "SELECT user_id, email, password, role FROM users WHERE email = ?";
 
         if($stmt = mysqli_prepare($conn, $sql)){
             // Bind variables to the prepared statement as parameters
@@ -43,7 +46,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 // Check if username exists, if yes then verify password
                 if(mysqli_stmt_num_rows($stmt) == 1){
                     // Bind result variables
-                    mysqli_stmt_bind_result($stmt, $user_id, $email, $password);
+                    mysqli_stmt_bind_result($stmt, $user_id, $email, $password, $role);
                     if(mysqli_stmt_fetch($stmt)){
                         if ($password == $password) {
                             // Password is correct, so start a new session
@@ -53,11 +56,24 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             $_SESSION["loggedin"] = true;
                             $_SESSION["id"] = $user_id;
                             $_SESSION["email"] = $email;
+                            $_SESSION['role'] = $role;
 
+                            if ($role == 'Patient') {
+                              header("Location: patienthome.php");
+                            } elseif ($role == 'Doctor') {
+                              header("Location: drhome.php");
+                            } elseif ($role == 'Family Member') {
+                              header("Location: familyhome.php");
+                            } elseif ($role == 'Supervisor') {
+                              header("Location: superhome.php");
+                            } elseif ($role == 'Caregiver') {
+                              header("Location: caregiverhome.php");
+                            } elseif ($role == 'Admin') {
+                              header("Location: adminhome.php");
+                            } else {
+                              $role_err = 'You do not have access to this site.';
+                            }
 
-
-                            // Redirect user to welcome page
-                            header("location: welcome.php");
                         } else{
                             // Display an error message if password is not valid
                             $password_err = "The password you entered was not valid.";
@@ -90,27 +106,103 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <meta charset="utf-8">
     <title></title>
   </head>
-  <body>
+<body onLoad="noBack();" onpageshow="if (event.persisted) noBack();" onUnload="">
+
+<div class="header">
+  <div class="dropdown menu">
+    <button class="dropbtn">Menu</button>
+    <div class="dropdown-content">
+      <a href="#"><li>About</li></a>
+      <a href="#"><li>Contact</li></a>
+    </div>
+  </div>
+  <h1>Doctor Josh </h1>
+</div>
+
+
+
+<div class="row">
+
+
+  <div class="col-6">
     <div class="wrapper">
         <h2>Login</h2>
         <p>Please fill in your credentials to login.</p>
-        <form method="post">
-            <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
-                <label>Username</label>
-                <input type="text" name="email" class="form-control" value="<?php echo $email; ?>">
+        <form class="login" method="post">
+            <div class="form-group">
+                <label>Email</label>
+                <input type="text" name="email" class="form-control">
                 <span class="help-block"><?php echo $username_err; ?></span>
             </div>
-            <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
+            <div class="form-group ">
                 <label>Password</label>
                 <input type="password" name="password" class="form-control">
                 <span class="help-block"><?php echo $password_err; ?></span>
             </div>
             <div class="form-group">
-                <input type="submit" class="btn btn-primary" value="Login">
+                <input type="submit"value="Login">
             </div>
             <p>Don't have an account? <a href="register.php">Sign up now</a>.</p>
         </form>
     </div>
+  </div>
+
+  <div class="col-3 right">
+    <div class="aside">
+      <h2>What?</h2>
+      <p>Chania is a city on the island of Crete.</p>
+      <h2>Where?</h2>
+      <p>Crete is a Greek island in the Mediterranean Sea.</p>
+      <h2>How?</h2>
+      <p>You can reach Chania airport from all over Europe.</p>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <footer>
+    <ul class="foot">
+        <li class="foot">
+            <a class="info">Career Opportunities</a>
+            <a class="info">Volunteers</a>
+            <a class="info">Employees</a>
+            <a class="info">Financial Assistance</a>
+            <a class="info">Contact  Us</a>
+            <a class="info">HIPAA and Privacy</a>
+            <a class="info">Language Assistance</a>
+            <a class="info"> 740 E King Street Lancaster, PA | 24-hour Switchboard: 717-777-7777</address>
+        <div>
+            <span>
+              <a href=""><img class="icon" src="icons/iconfinder_2018_social_media_popular_app_logo_facebook_3225194.svg" alt=""></a>
+            </span>
+            <span>
+              <a href=""><img class="icon" src="icons/iconfinder_2018_social_media_popular_app_logo_instagram_3225191.svg" alt=""></a>
+            </span>
+            <span>
+              <a href=""><img class="icon" src="icons/iconfinder_2018_social_media_popular_app_logo_linkedin_3225190.svg" alt=""></a>
+            </span>
+            <span>
+              <a href=""><img class="icon" src="icons/iconfinder_2018_social_media_popular_app_logo_pinterest_3225188.svg" alt=""></a>
+            </span>
+            <span>
+              <a href=""><img class="icon" src="icons/iconfinder_2018_social_media_popular_app_logo_twitter_3225183.svg" alt=""></a>
+            </span>
+            <span>
+              <a href=""><img class="icon" src="icons/iconfinder_2018_social_media_popular_app_logo_youtube_3225180.svg" alt=""></a>
+            </span>
+        </div>
+</footer>
+
+
+
+<script>
+
+function noBack(){
+  window.history.forward();
+}
+
+</script>
+
 
   </body>
 </html>
