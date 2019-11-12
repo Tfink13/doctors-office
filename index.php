@@ -46,9 +46,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 // Check if username exists, if yes then verify password
                 if(mysqli_stmt_num_rows($stmt) == 1){
                     // Bind result variables
-                    mysqli_stmt_bind_result($stmt, $user_id, $email, $password, $role);
+                    mysqli_stmt_bind_result($stmt, $user_id, $email, $hashed_password, $role);
                     if(mysqli_stmt_fetch($stmt)){
-                        if ($password == $password) {
+                        if(password_verify($password, $hashed_password)){
                             // Password is correct, so start a new session
                             session_start();
 
@@ -122,8 +122,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
 
 <div class="row">
-
-
   <div class="col-6">
     <div class="wrapper">
         <h2>Login</h2>
@@ -149,12 +147,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
   <div class="col-3 right">
     <div class="aside">
-      <h2>What?</h2>
+      <!-- <h2>What?</h2>
       <p>Chania is a city on the island of Crete.</p>
       <h2>Where?</h2>
       <p>Crete is a Greek island in the Mediterranean Sea.</p>
       <h2>How?</h2>
-      <p>You can reach Chania airport from all over Europe.</p>
+      <p>You can reach Chania airport from all over Europe.</p> -->
     </div>
   </div>
 </div>
@@ -173,7 +171,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             <a class="info"> 740 E King Street Lancaster, PA | 24-hour Switchboard: 717-777-7777</address>
         <div>
             <span>
-              <a href=""><img class="icon" src="icons/iconfinder_2018_social_media_popular_app_logo_facebook_3225194.svg" alt=""></a>
+              <a href="facebook.com"><img class="icon" src="icons/iconfinder_2018_social_media_popular_app_logo_facebook_3225194.svg" alt=""></a>
             </span>
             <span>
               <a href=""><img class="icon" src="icons/iconfinder_2018_social_media_popular_app_logo_instagram_3225191.svg" alt=""></a>
