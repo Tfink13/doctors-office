@@ -1,5 +1,4 @@
 <?php
-
 include 'db_connect.php';
 
 $email = $password = "";
@@ -40,24 +39,20 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
             // Attempt to execute the prepared statement
             if(mysqli_stmt_execute($stmt)){
-                // Store result
+                // Store query result
                 mysqli_stmt_store_result($stmt);
 
                 // Check if username exists, if yes then verify password
                 if(mysqli_stmt_num_rows($stmt) == 1){
                     // Bind result variables
-                    mysqli_stmt_bind_result($stmt, $user_id, $email, $password, $role);
+                    mysqli_stmt_bind_result($stmt, $user_id, $email, $hashed_password, $role);
                     if(mysqli_stmt_fetch($stmt)){
-                        if ($password == $password) {
+                        if (password_verify($password, $hashed_password)) {
                             // Password is correct, so start a new session
                             session_start();
 
                             // Store data in session variables
-                            $_SESSION["loggedin"] = true;
                             $_SESSION["id"] = $user_id;
-                            $_SESSION["email"] = $email;
-                            $_SESSION['role'] = $role;
-
                             if ($role == 'Patient') {
                               header("Location: patienthome.php");
                             } elseif ($role == 'Doctor') {
@@ -106,7 +101,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <meta charset="utf-8">
     <title></title>
   </head>
-<body onLoad="noBack();" onpageshow="if (event.persisted) noBack();" onUnload="">
+<body>
 
 <div class="header">
   <div class="dropdown menu">
@@ -142,7 +137,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             <div class="form-group">
                 <input type="submit"value="Login">
             </div>
-            <p>Don't have an account? <a href="register.php">Sign up now</a>.</p>
+            <p>Don't have an account? <a href="registration.php">Sign up now</a>.</p>
         </form>
     </div>
   </div>
@@ -193,16 +188,5 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         </div>
 </footer>
 
-
-
-<script>
-
-function noBack(){
-  window.history.forward();
-}
-
-</script>
-
-
-  </body>
+</body>
 </html>

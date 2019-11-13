@@ -1,6 +1,8 @@
 <?php
-include 'logout.php'; 
- ?>
+session_start();
+require "logout.php"; 
+require "auth.php";
+?>
 
 
  <!DOCTYPE html>

@@ -1,8 +1,7 @@
 <?php
-if (isset(($_POST['name']))) {
-  unset($_SESSION["userid"]);
-  header("Location: home.php");
-
+if (isset($_POST["logout"])) {
+  session_unset();
+  header("Location: index.php");
 }
 
  ?>
@@ -17,8 +16,8 @@ if (isset(($_POST['name']))) {
    </head>
    <body>
 
-     <form class="" action="home.php" method="post">
-       <button type="submit" name="logout">Log Out</button>
+     <form class="" action="#" method="post">
+       <input type="submit" value="logout" name="logout">
      </form>
 
    </body>
