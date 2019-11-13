@@ -1,6 +1,6 @@
 <?php
-if (isset(($_POST['name']))) {
-  unset($_SESSION["id"]);
+if (isset(($_POST['logout']))) {
+  session_destroy();
   header("Location: index.php");
 
 }

@@ -8,6 +8,12 @@ $role = "";
 
 
 
+if (isset(($_POST['logout']))) {
+  session_destroy();
+  header("Location: index.php");
+}
+
+
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
 
@@ -25,6 +31,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $password = trim($_POST["password"]);
 
     }
+
+
 
     // Validate credentials
     if(empty($username_err) && empty($password_err)){
@@ -57,6 +65,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             $_SESSION["id"] = $user_id;
                             $_SESSION["email"] = $email;
                             $_SESSION['role'] = $role;
+                            print_r($_SESSION["loggedin"]);
 
                             if ($role == 'Patient') {
                               header("Location: patienthome.php");

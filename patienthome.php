@@ -1,5 +1,16 @@
 <?php
-include 'logout.php'; 
+include 'logout.php';
+session_start();
+print_r($_SESSION['loggedin']);
+print_r($_SESSION['role']);
+
+if($_SESSION['loggedin'] = True && $_SESSION['role'] == 'Patient') {
+
+} else {
+  header("Location: index.php");
+}
+
+
  ?>
 
 
