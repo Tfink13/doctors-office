@@ -371,7 +371,6 @@ if (isset(($_POST['patient_sub']))) {
 
     function yesnoCheck(that) {
         if (that.value == "Patient") {
-          alert("check");
           document.getElementById("ins_patient").style.display = "block";
           document.getElementById("regsub").style.display = "none";
           document.getElementById("ifYes").style.display = "block";
