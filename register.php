@@ -186,7 +186,6 @@ if (isset(($_POST['patient_sub']))) {
           // Attempt to execute the prepared statement
           if(mysqli_stmt_execute($stmt)){
 
-
             $ssql = "SELECT user_id FROM users WHERE email = ?";
 
             if($sstmt = mysqli_prepare($conn, $ssql)){
@@ -194,7 +193,6 @@ if (isset(($_POST['patient_sub']))) {
                 mysqli_stmt_bind_param($sstmt, "s", $param_email);
                 // Set parameters
                 $param_email = $email;
-
                 if(mysqli_stmt_execute($sstmt)){
                     // Store result
                     mysqli_stmt_store_result($sstmt);
@@ -203,6 +201,7 @@ if (isset(($_POST['patient_sub']))) {
                       mysqli_stmt_bind_result($sstmt, $user_id);
                       if(mysqli_stmt_fetch($sstmt)){
                         $u_id = $user_id;
+
                         $isql = "INSERT INTO patients (user_id, family_code, emergency_contact, relation_to_contact) VALUES (?, ?, ?, ?)";
                         if($istmt = mysqli_prepare($conn, $isql)){
                           mysqli_stmt_bind_param($istmt, "ssss", $param_user_id, $param_familyCode, $param_emer_con, $param_rel_emer_con);
@@ -210,35 +209,33 @@ if (isset(($_POST['patient_sub']))) {
                           $param_familyCode = $familyCode;
                           $param_emer_con = $emerCon;
                           $param_rel_emer_con  = $relCon;
-
-
                           if(mysqli_stmt_execute($istmt)){
                             header("location: index.php");
                           } else {
                             echo "Something went wrong. Please try again later.";
                           }
-                    }
-                    // Close statement
-                    mysqli_stmt_close($stmt);
+                        }
+                        // Close statement
+                        mysqli_stmt_close($istmt);
+                      }
+                    } else {
+                      // Display an error message if username doesn't exist
+                      $username_err = "No account found with that email.";
                   }
                 } else{
-                  $username_err = "No account found with that email.";
+                    echo "Oops! Something went wrong. Please try again later.";
+                  }
               }
-        } else{
-            echo "Something went wrong. Please try again later.";
+              // Close statement
+              mysqli_stmt_close($sstmt);
+          } else{
+              echo "Oops! Something went wrong. Please try again later.";
+            }
+          }
+          // Close statement
+          mysqli_stmt_close($stmt);
         }
-    }
-    // Close statement
-    mysqli_stmt_close($stmt);
-} else {
-  echo "Something went wrong. Please try again later.";
-}
-}
-mysqli_stmt_close($stmt);
-}
-}
-
-
+      }
 
  ?>
 
@@ -270,8 +267,8 @@ mysqli_stmt_close($stmt);
             <label>Role</label>
             <br>
             <select onchange="yesnoCheck(this);" class="role" name="role">
-              <option>Doctor</option>
               <option value="Patient">Patient</option>
+              <option>Doctor</option>
               <option>Family Memember</option>
               <option>Supervisor</option>
               <option>Caregiver</option>
@@ -374,6 +371,7 @@ mysqli_stmt_close($stmt);
 
     function yesnoCheck(that) {
         if (that.value == "Patient") {
+          alert("check");
           document.getElementById("ins_patient").style.display = "block";
           document.getElementById("regsub").style.display = "none";
           document.getElementById("ifYes").style.display = "block";
@@ -381,8 +379,6 @@ mysqli_stmt_close($stmt);
           document.getElementById("ifY").style.display = "block";
         } else {
             document.getElementById("ifYes").style.display = "none";
-            document.getElementById("ifYe").style.display = "none";
-            document.getElementById("ifY").style.display = "none";
         }
     }
     </script>
