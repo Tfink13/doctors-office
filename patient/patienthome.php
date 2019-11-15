@@ -4,7 +4,7 @@ session_start();
 if($_SESSION['loggedin'] = True && $_SESSION['role'] == 'Patient') {
 
 } else {
-  header("Location: index.php");
+  header("Location: http://localhost/doctors-office/");
 }
 
 
@@ -14,7 +14,7 @@ if($_SESSION['loggedin'] = True && $_SESSION['role'] == 'Patient') {
  <!DOCTYPE html>
  <html lang="en" dir="ltr">
    <head>
-     <link rel="stylesheet" href="master.css">
+     <link rel="stylesheet" href="../master.css">
      <meta charset="utf-8">
      <title></title>
    </head>
@@ -28,7 +28,7 @@ if($_SESSION['loggedin'] = True && $_SESSION['role'] == 'Patient') {
            <a href="#"><li>Contact</li></a>
        </div>
        </div>
-       <form class="x" action="index.php" method="post">
+       <form class="x" action="../logout.php" method="post">
          <button class="x" type="submit" name="logout"><li style="list-style: none;">Logout</li></button>
        </form>
      </div>

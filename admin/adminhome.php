@@ -1,19 +1,19 @@
 <?php
 session_start();
 
-include 'db.php';
+include '../db/db.php';
 $user_id_err = "";
 
 // authenticating the user in the admin
 if($_SESSION['loggedin'] = True && $_SESSION['role'] == 'Admin') {
 
 } else {
-  header("Location: index.php");
+  header("Location: http://localhost/doctors-office");
 }
 
 if (isset(($_POST['logout']))) {
   session_destroy();
-  header("Location: index.php");
+  header("Location: http://localhost/doctors-office");
 }
  ?>
 
