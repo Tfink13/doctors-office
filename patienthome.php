@@ -1,8 +1,5 @@
 <?php
-include 'logout.php';
 session_start();
-print_r($_SESSION['loggedin']);
-print_r($_SESSION['role']);
 
 if($_SESSION['loggedin'] = True && $_SESSION['role'] == 'Patient') {
 
@@ -22,15 +19,33 @@ if($_SESSION['loggedin'] = True && $_SESSION['role'] == 'Patient') {
      <title></title>
    </head>
    <body>
-     <main>
-       <header>
-           <nav>
-               <ul>
-                   <li><a> Home </a></li>
-                   <li><a> Additional Information </a></li>
-               </ul>
-           </nav>
-       </header>
-     </main>
+     <div class="header">
+       <div class="dropdown menu">
+         <button class="dropbtn">Menu</button>
+         <div class="dropdown-content">
+           <a href="patienthome.php"><li>Home</li></a>
+           <a href="#"><li>About</li></a>
+           <a href="#"><li>Contact</li></a>
+       </div>
+       </div>
+       <form class="x" action="index.php" method="post">
+         <button class="x" type="submit" name="logout"><li style="list-style: none;">Logout</li></button>
+       </form>
+     </div>
+
+
+ <div class="col-3 right">
+   <div class="regform">
+     <form method="post">
+       <input type="text" name="" value="<?php echo $_SESSION['id'];?>">
+       <input type="text" name="" value="<?php echo $_SESSION['fname'];?>">
+       <div class="regsub">
+       <button type="submit" name="sub">Submit</button>
+       <button type="button" name="cancel">Cancel</button>
+       </div>
+     </form>
+   </div>
+ </div>
+
    </body>
  </html>

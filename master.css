@@ -18,7 +18,7 @@ a.info {
 button.x {
   position: relative;
   top: 12.5px;
-  left: 1062px;
+  left: 1450px;
   outline: none;
   border-radius: 20px;
   background-color: #4CAF50;
@@ -45,9 +45,8 @@ div.footer {
   text-align: center;
   font-size: 12px;
   padding: 15px;
-  position: absolute;
+  position: fixed;
     width: 99%;
-    /* left: 0px; */
     bottom:  0px;
 }
 
@@ -203,6 +202,7 @@ div div.regform {
   width: 35%;
   border-radius: 10px;
   background-color: #33b5e5;
+  margin-bottom: 200px;
 }
 
 /* For desktop: */
@@ -270,6 +270,7 @@ table {
     margin-top: 30px;
     border-radius: 9px;
     margin-bottom: 30px;
+    overflow: scroll;
 }
 
 p.users {

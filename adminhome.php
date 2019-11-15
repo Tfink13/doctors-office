@@ -4,27 +4,17 @@ session_start();
 include 'db.php';
 $user_id_err = "";
 
-
-
-if (isset(($_POST['logout']))) {
-  session_destroy();
-  header("Location: index.php");
-
-}
-
-
+// authenticating the user in the admin
 if($_SESSION['loggedin'] = True && $_SESSION['role'] == 'Admin') {
 
 } else {
   header("Location: index.php");
 }
 
-
 if (isset(($_POST['logout']))) {
-  unset($_SESSION["userid"]);
+  session_destroy();
   header("Location: index.php");
 }
-
  ?>
 
  <!DOCTYPE html>
@@ -44,19 +34,22 @@ if (isset(($_POST['logout']))) {
            <a href="#"><li>Contact</li></a>
        </div>
        </div>
-       <h1>Doctor Josh </h1>
-       <form class="x" action="index.php" method="post">
+       <form class="x" method="post">
          <button class="x" type="submit" name="logout"><li style="list-style: none;">Logout</li></button>
        </form>
      </div>
    </body>
  </html>
 
+
+
+
  <?php
+
  if (isset(($_POST['update']))) {
 
    if(empty(trim(@$_POST["user"]))){
-       $username_err = "Please enter user id to update to apporve their application.";
+       $username_err = "Enter user id to apporve application.";
    } else{
        $user = trim($_POST["user"]);
    }
@@ -102,12 +95,9 @@ if (isset(($_POST['logout']))) {
      echo "</table>";
    }
  }
-
-
-
-
-
   ?>
+
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>

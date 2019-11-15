@@ -4,14 +4,6 @@ include 'db_connect.php';
 
 $email = $password = "";
 $username_err = $password_err = "";
-$role = "";
-
-
-
-if (isset(($_POST['logout']))) {
-  session_destroy();
-  header("Location: index.php");
-}
 
 
 // Processing form data when form is submitted
@@ -37,7 +29,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     // Validate credentials
     if(empty($username_err) && empty($password_err)){
         // Prepare a select statement
-        $sql = "SELECT user_id, email, password, role FROM users WHERE email = ?";
+        $sql = "SELECT user_id, fName, email, password, role FROM users WHERE email = ?";
 
         if($stmt = mysqli_prepare($conn, $sql)){
             // Bind variables to the prepared statement as parameters
@@ -54,13 +46,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 // Check if username exists, if yes then verify password
                 if(mysqli_stmt_num_rows($stmt) == 1){
                     // Bind result variables
-                    mysqli_stmt_bind_result($stmt, $user_id, $email, $hashed_password, $role);
+                    mysqli_stmt_bind_result($stmt, $user_id, $fName, $email, $hashed_password, $role);
                     if(mysqli_stmt_fetch($stmt)){
                         if(password_verify($password, $hashed_password)){
                             // Password is correct, so start a new session
                             session_start();
 
                             // Store data in session variables
+                            $_SESSION['fname'] = $fName;
                             $_SESSION["loggedin"] = true;
                             $_SESSION["id"] = $user_id;
                             $_SESSION["email"] = $email;
@@ -90,7 +83,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     }
                 } else{
                     // Display an error message if username doesn't exist
-                    $username_err = "No account found with that username.";
+                    $username_err = "No account found with that email.";
                 }
             } else{
                 echo "Oops! Something went wrong. Please try again later.";
@@ -154,14 +147,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     </div>
   </div>
 
+
   <div class="col-3 right">
     <div class="aside">
-      <!-- <h2>What?</h2>
-      <p>Chania is a city on the island of Crete.</p>
-      <h2>Where?</h2>
-      <p>Crete is a Greek island in the Mediterranean Sea.</p>
-      <h2>How?</h2>
-      <p>You can reach Chania airport from all over Europe.</p> -->
     </div>
   </div>
 </div>
@@ -204,9 +192,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
 <script>
 
-function noBack(){
-  window.history.forward();
-}
+history.pushState(null, null, document.URL);
+window.addEventListener('popstate', function () {
+    history.pushState(null, null, document.URL);
+});
 
 </script>
 
