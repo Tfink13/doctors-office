@@ -29,7 +29,7 @@ if (isset(($_POST['logout']))) {
        <div class="dropdown menu">
          <button class="dropbtn">Menu</button>
          <div class="dropdown-content">
-           <a href="index.php"><li>Home</li></a>
+           <a href="../index.php"><li>Home</li></a>
            <a href="#"><li>About</li></a>
            <a href="#"><li>Contact</li></a>
        </div>
@@ -49,7 +49,7 @@ if (isset(($_POST['logout']))) {
  if (isset(($_POST['update']))) {
 
    if(empty(trim(@$_POST["user"]))){
-       $username_err = "Enter user id to apporve application.";
+       $username_err = "Enter user id to approve application.";
    } else{
        $user = trim($_POST["user"]);
    }
@@ -90,7 +90,14 @@ if (isset(($_POST['logout']))) {
        foreach ($row as $field => $value) {
          echo "<td border='1'>" . $value . "</td>";
          }
+         echo "<td>";
+         echo "<form>
+                <input type='submit' name='Approve' value='approve'>
+                <input type='submit' name='Reject' value='reject'>
+                </form>";
+         echo "</td>";
          echo "</tr>";
+      
      }
      echo "</table>";
    }
