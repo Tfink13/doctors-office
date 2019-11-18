@@ -378,6 +378,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
           document.getElementById("ifY").style.display = "block";
         } else {
             document.getElementById("ifYes").style.display = "none";
+            document.getElementById("ifYe").style.display = "none";
+            document.getElementById("ifY").style.display = "none";
         }
     }
     </script>
