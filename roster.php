@@ -10,5 +10,6 @@
 </head>
 <body>
 <input type="date" id="" name="">
+<?php require "footer.php" ?>
 </body>
 </html>
