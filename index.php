@@ -1,6 +1,6 @@
 <?php
 
-include 'db_connect.php';
+include 'db/db_connect.php';
 
 $email = $password = "";
 $username_err = $password_err = "";
@@ -61,7 +61,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             print_r($_SESSION["loggedin"]);
 
                             if ($role == 'Patient') {
-                              header("Location: patienthome.php");
+                              header("Location: patient/patienthome.php");
                             } elseif ($role == 'Doctor') {
                               header("Location: drhome.php");
                             } elseif ($role == 'Family Member') {
@@ -71,7 +71,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             } elseif ($role == 'Caregiver') {
                               header("Location: caregiverhome.php");
                             } elseif ($role == 'Admin') {
-                              header("Location: adminhome.php");
+                              header("Location: admin/adminhome.php");
                             } else {
                               $role_err = 'You do not have access to this site.';
                             }

@@ -1,5 +1,5 @@
 <?php
-include 'db.php';
+include 'db/db.php';
 
 $email_err = $password_err = "";
 $username_err = "";
@@ -80,7 +80,7 @@ if (isset(($_POST['sub']))) {
             // Attempt to execute the prepared statement
             if(mysqli_stmt_execute($stmt)){
                 // Redirect to login page
-                header("location: index.php");
+                header("location: http://localhost/doctors-office/");
             } else{
                 echo "Something went wrong. Please try again later.";
             }
@@ -210,7 +210,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                           $param_emer_con = $emerCon;
                           $param_rel_emer_con  = $relCon;
                           if(mysqli_stmt_execute($istmt)){
-                            header("location: index.php");
+                            header("location: http://localhost/doctors-office/");
                           } else {
                             echo "Something went wrong. Please try again later.";
                           }
