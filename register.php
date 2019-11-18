@@ -94,7 +94,7 @@ if (isset(($_POST['sub']))) {
 
 
 
-if (isset(($_POST['patient_sub']))) {
+if($_SERVER["REQUEST_METHOD"] == "POST"){
   //  check the three new nputs for patients
   if(empty(trim($_POST["familyCode"]))){
       $family_code_err = "Please enter a family code.";
@@ -235,6 +235,7 @@ if (isset(($_POST['patient_sub']))) {
           // Close statement
           mysqli_stmt_close($stmt);
         }
+        mysqli_close($conn);
       }
 
  ?>
@@ -267,8 +268,8 @@ if (isset(($_POST['patient_sub']))) {
             <label>Role</label>
             <br>
             <select onchange="yesnoCheck(this);" class="role" name="role">
-              <option value="Patient">Patient</option>
               <option>Doctor</option>
+              <option value="Patient">Patient</option>
               <option>Family Memember</option>
               <option>Supervisor</option>
               <option>Caregiver</option>
@@ -327,7 +328,6 @@ if (isset(($_POST['patient_sub']))) {
               </div>
 
 
-
         </form>
       </div>
     </div>
@@ -371,7 +371,6 @@ if (isset(($_POST['patient_sub']))) {
 
     function yesnoCheck(that) {
         if (that.value == "Patient") {
-          alert("check");
           document.getElementById("ins_patient").style.display = "block";
           document.getElementById("regsub").style.display = "none";
           document.getElementById("ifYes").style.display = "block";
