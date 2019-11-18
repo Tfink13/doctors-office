@@ -20,7 +20,7 @@ if (isset(($_POST['logout']))) {
  <!DOCTYPE html>
  <html lang="en" dir="ltr">
    <head>
-     <link rel="stylesheet" href="master.css">
+     <link rel="stylesheet" href="../master.css">
      <meta charset="utf-8">
      <title></title>
    </head>
@@ -71,7 +71,9 @@ if (isset(($_POST['logout']))) {
        foreach ($row as $field => $value) {
          echo "<td border='1px solid black;>" . $value . "</td>";
          }
+
          echo "</tr>";
+         echo "<button type='submit' name='patient_sub'>Submit</button>";
      }
      echo "</table>";
    }
@@ -101,6 +103,7 @@ if (isset(($_POST['logout']))) {
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
+    <link rel="stylesheet" href="master.css">
     <meta charset="utf-8">
     <title></title>
   </head>
