@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-include '../db/db.php';
+require '../db/db.php';
 $user_id_err = "";
 
 // authenticating the user in the admin
@@ -116,5 +116,7 @@ if (isset(($_POST['logout']))) {
       <input class="update" type="text" name="user" value="">
       <button type="submit" name="update">UPDATE</button>
     </form>
+
+    <?php require "../footer.php" ?>
   </body>
 </html>

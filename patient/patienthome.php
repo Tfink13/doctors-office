@@ -47,5 +47,6 @@ if($_SESSION['loggedin'] = True && $_SESSION['role'] == 'Patient') {
    </div>
  </div>
 
+ <?php require "../footer.php" ?>
    </body>
  </html>

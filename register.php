@@ -1,5 +1,5 @@
 <?php
-include 'db/db.php';
+require 'db/db.php';
 
 $email_err = $password_err = "";
 $username_err = "";
@@ -247,7 +247,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <meta charset="utf-8">
     <title></title>
   </head>
-  <body onLoad="noBack();" onpageshow="if (event.persisted) noBack();" onUnload="">
+  <body>
 
     <div class="header">
       <div class="dropdown menu">
