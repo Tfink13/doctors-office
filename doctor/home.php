@@ -42,5 +42,7 @@ if (isset(($_POST['logout']))) {
 <label for="">Appointments</label>
 <input type="text" name="till_date" value="till date">
 
+<?php require "../footer.php" ?>
+
   </body>
 </html>

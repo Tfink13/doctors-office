@@ -54,6 +54,6 @@ if (isset(($_POST['logout']))) {
     </div>
 
 
-
+    <?php require "../footer.php" ?>
   </body>
 </html>
