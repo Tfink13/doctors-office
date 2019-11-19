@@ -1,6 +1,8 @@
+<!-- Join the users and employess tables in php -->
 <?php
 session_start();
 include '../db/db.php';
+
 
 if($_SESSION['loggedin'] = True && $_SESSION['role'] == 'Admin') {
 
@@ -13,6 +15,7 @@ if (isset(($_POST['logout']))) {
   header("Location: http://localhost/doctors-office");
 }
  ?>
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -33,30 +36,48 @@ if (isset(($_POST['logout']))) {
           <a href="report.php"><li>Report</li></a>
       </div>
       </div>
-      <h1>Employees</h1>
       <form class="x" method="post">
         <button class="x" type="submit" name="logout"><li style="list-style: none;">Logout</li></button>
       </form>
+      <h1>Appointments</h1>
     </div>
 
-  <div class="col-3 right">
-    <div class="regform">
-      <form method="post">
-          <div class="">
-            <label for="">Employee ID</label>
-            <input onchange="yesnoCheck(this);" type="text" name="p_id" value="">
-            <span>Error</span>
-          </div>
-          <div class="">
-            <label for="">New Salary</label>
-            <input type="text" name="p_id" value="">
-            <span>Error</span>
-          </div>
-          <button type="submit" name="ok">OK</button>
-          <button type="submit" name="cancel">Cancel</button>
-      </form>
-    </div>
+
+<div class="col-3 right">
+  <div class="regform">
+    <form method="post">
+        <div class="">
+          <label for="">Patient ID</label>
+          <input onchange="yesnoCheck(this);" type="text" name="p_id" value="">
+          <button type="submit" name="id_sub">Search</button>
+        </div>
+        <div class="">
+          <label for="">Date</label>
+          <input type="text" name="p_id" value="">
+        </div>
+        <div class="">
+          <label for="">Name</label>
+          <input type="text" name="p_id" value="">
+        </div>
+        <div>
+          <label>Doctor</label>
+          <br>
+          <select class="role" name="role">
+            <option>Doctor</option>
+            <option>dr 1</option>
+            <option>dr 2</option>
+            <option>dr 3</option>
+            <option>dr 4</option>
+            <option>dr 5</option>
+          </select>
+        </div>
+    </form>
   </div>
+</div>
+
+
+
+
 
 
   <div class="footer">
@@ -94,15 +115,14 @@ if (isset(($_POST['logout']))) {
   </footer>
 </div>
 
-
 <script>
-function yesnoCheck(that) {
-    if (that.value == "") {
+  function yesnoCheck(that) {
+      if (that.value == "") {
 
-    } else {
+      } else {
 
-    }
-}
+      }
+  }
 </script>
   </body>
 </html>

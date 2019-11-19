@@ -2,6 +2,7 @@
 session_start();
 include '../db/db.php';
 
+
 if($_SESSION['loggedin'] = True && $_SESSION['role'] == 'Admin') {
 
 } else {
@@ -33,31 +34,40 @@ if (isset(($_POST['logout']))) {
           <a href="report.php"><li>Report</li></a>
       </div>
       </div>
-      <h1>Employees</h1>
       <form class="x" method="post">
         <button class="x" type="submit" name="logout"><li style="list-style: none;">Logout</li></button>
       </form>
+      <h1>Patient Info</h1>
     </div>
 
-  <div class="col-3 right">
-    <div class="regform">
-      <form method="post">
-          <div class="">
-            <label for="">Employee ID</label>
-            <input onchange="yesnoCheck(this);" type="text" name="p_id" value="">
-            <span>Error</span>
-          </div>
-          <div class="">
-            <label for="">New Salary</label>
-            <input type="text" name="p_id" value="">
-            <span>Error</span>
-          </div>
-          <button type="submit" name="ok">OK</button>
-          <button type="submit" name="cancel">Cancel</button>
-      </form>
-    </div>
+<div class="col-3 right">
+  <div class="regform">
+    <form method="post">
+      <h1>Additional Patient Information</h1>
+      <form class="" action="index.html" method="post">
+        <div class="">
+          <label for="">Patient ID</label>
+          <input onchange="yesnoCheck(this);" type="text" name="p_id" value="">
+          <span>Error</span>
+        </div>
+        <div class="">
+          <label for="">Date</label>
+          <input type="text" name="p_id" value="">
+          <span>Error</span>
+        </div>
+        <div class="">
+          <label for="">Name</label>
+          <input type="text" name="p_id" value="">
+          <span>Error</span>
+        </div>
+        <div class="">
+          <label for="">Addmision Date</label>
+          <input type="text" name="p_id" value="">
+          <span>Error</span>
+        </div>
+    </form>
   </div>
-
+</div>
 
   <div class="footer">
     <footer>
@@ -94,7 +104,6 @@ if (isset(($_POST['logout']))) {
   </footer>
 </div>
 
-
 <script>
 function yesnoCheck(that) {
     if (that.value == "") {
@@ -105,4 +114,5 @@ function yesnoCheck(that) {
 }
 </script>
   </body>
+
 </html>

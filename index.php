@@ -63,7 +63,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             if ($role == 'Patient') {
                               header("Location: patient/patienthome.php");
                             } elseif ($role == 'Doctor') {
-                              header("Location: drhome.php");
+                              header("Location: doctor/home.php");
                             } elseif ($role == 'Family Member') {
                               header("Location: familyhome.php");
                             } elseif ($role == 'Supervisor') {
