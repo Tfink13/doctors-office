@@ -18,7 +18,7 @@ a.info {
 button.x {
   position: relative;
   top: 12.5px;
-  left: 1450px;
+  float: right;
   outline: none;
   border-radius: 20px;
   background-color: #4CAF50;
@@ -67,6 +67,10 @@ form.update {
 form.login {
   width: 300px;
   margin: 0 auto;
+}
+
+h1 {
+  margin-left: 20px;
 }
 
 img {

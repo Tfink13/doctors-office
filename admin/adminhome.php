@@ -25,18 +25,24 @@ if (isset(($_POST['logout']))) {
      <title></title>
    </head>
    <body>
+
      <div class="header">
+
        <div class="dropdown menu">
          <button class="dropbtn">Menu</button>
          <div class="dropdown-content">
-           <a href="../index.php"><li>Home</li></a>
-           <a href="#"><li>About</li></a>
-           <a href="#"><li>Contact</li></a>
+           <a href="adminhome.php"><li>Home</li></a>
+           <a href="patientinfo.php"><li>Patient Info</li></a>
+           <a href="patientsearch.php"><li>Patient Search</li></a>
+           <a href="appointments.php"><li>Appointments</li></a>
+           <a href="employees.php"><li>Employees</li></a>
+           <a href="report.php"><li>Report</li></a>
        </div>
-       </div>
-       <form class="x" method="post">
-         <button class="x" type="submit" name="logout"><li style="list-style: none;">Logout</li></button>
-       </form>
+     </div>
+     <form class="x" method="post">
+       <button class="x" type="submit" name="logout"><li style="list-style: none;">Logout</li></button>
+     </form>
+          <h1>Admin Homepage</h1>
      </div>
    </body>
  </html>
@@ -71,7 +77,9 @@ if (isset(($_POST['logout']))) {
        foreach ($row as $field => $value) {
          echo "<td border='1px solid black;>" . $value . "</td>";
          }
+
          echo "</tr>";
+         echo "<button type='submit' name='patient_sub'>Submit</button>";
      }
      echo "</table>";
    }
@@ -108,6 +116,7 @@ if (isset(($_POST['logout']))) {
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
+    <link rel="stylesheet" href="../master.css">
     <meta charset="utf-8">
     <title></title>
   </head>

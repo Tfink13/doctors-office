@@ -324,7 +324,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
               <button id="regsub" type="submit" name="sub">Submit</button>
               </div>
               <div id="ins_patient" class="regsub" style="display: none;">
-              <button type="submit" name="patient_sub"k>Submit</button>
+              <button type="submit" name="patient_sub">Submit</button>
               </div>
 
 
