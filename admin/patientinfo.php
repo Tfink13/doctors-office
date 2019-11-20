@@ -1,8 +1,9 @@
+
+
+
 <?php
-session_start();
 include '../db/db.php';
-
-
+session_start();
 if($_SESSION['loggedin'] = True && $_SESSION['role'] == 'Admin') {
 
 } else {
@@ -13,13 +14,87 @@ if (isset(($_POST['logout']))) {
   session_destroy();
   header("Location: http://localhost/doctors-office");
 }
- ?>
+
+
+
+$sql = "SELECT patient_id, u.fName, u.lName FROM patients p JOIN users u ON p.user_id = u.user_id;";
+$results = mysqli_query($conn, $sql);
+$users = [];
+$jsUsers= [];
+#echo gettype($users);
+$resultCheck = mysqli_num_rows($results);
+$i = 0;
+
+if($resultCheck>0)
+    while($row = mysqli_fetch_assoc($results))
+        {
+          array_push($users, $row);
+        }
+#print_r($users);
+foreach ($users as $key => $value) {
+  foreach ($value as $Key => $Value){
+    array_push($jsUsers, $Value);
+  }
+}
+
+if(empty(trim($_POST["group"]))){
+    $group_err = "Please enter a group";
+} else {
+  $group = $_POST['group'];
+}
+
+if(empty(trim($_POST["date"]))){
+    $date_err = "Please enter a date.";
+} else {
+  $date = $_POST['date'];
+}
+
+
+if (isset(($_POST['sub']))) {
+
+  if(empty($group_err) && empty($admission_err)){
+
+      // Prepare an insert statement
+      $sql = "INSERT INTO users (role, fName, lName, email, phone, password, dob) VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+      if($stmt = mysqli_prepare($conn, $sql)){
+          // Bind variables to the prepared statement as parameters
+          mysqli_stmt_bind_param($stmt, "sssssss", $param_role, $param_fName, $param_lName, $param_email, $param_phone, $param_password, $param_dob);
+
+          // Set parameters
+          $param_role = $role;
+          $param_fName = $fName;
+          $param_lName = $fName;
+          $param_email = $email;
+          $param_phone = $phone;
+          $param_password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
+          $param_dob = $dob;
+
+          // Attempt to execute the prepared statement
+          if(mysqli_stmt_execute($stmt)){
+              // Redirect to login page
+              header("location: http://localhost/doctors-office/");
+          } else{
+              echo "Something went wrong. Please try again later.";
+          }
+      }
+
+      // Close statement
+      mysqli_stmt_close($stmt);
+  }
+
+}
+
+
+
+?>
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html>
   <head>
     <link rel="stylesheet" href="../master.css">
-    <meta charset="utf-8">
-    <title></title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Additional Info</title>
   </head>
   <body>
     <div class="header">
@@ -40,79 +115,48 @@ if (isset(($_POST['logout']))) {
       <h1>Patient Info</h1>
     </div>
 
-<div class="col-3 right">
-  <div class="regform">
-    <form method="post">
-      <h1>Additional Patient Information</h1>
-      <form class="" action="index.html" method="post">
-        <div class="">
-          <label for="">Patient ID</label>
-          <input onchange="yesnoCheck(this);" type="text" name="p_id" value="">
-          <span>Error</span>
-        </div>
-        <div class="">
-          <label for="">Date</label>
-          <input type="text" name="p_id" value="">
-          <span>Error</span>
-        </div>
-        <div class="">
-          <label for="">Name</label>
-          <input type="text" name="p_id" value="">
-          <span>Error</span>
-        </div>
-        <div class="">
-          <label for="">Addmision Date</label>
-          <input type="text" name="p_id" value="">
-          <span>Error</span>
-        </div>
+    <div class="col-3 right">
+      <div class="regform">
+    <form action="" method="post" accept-charset="utf-8">
+      <label>Patient Id: <input type="text" value="" name="id" id="id"/></label>
+      <label>Group: <input type="text" value="" name="group" id="group"/></label>
+      <label>Admission Date: <input type="text" value="" name="date" id="date"/></label>
+      <label>Patient Name:  <input type="text" value="" name="name" id="name"/></label>
+      <button type="submit" name="sub">OK</button>
+      <button type="submit" name="cancel">Cancel</button>
+
     </form>
   </div>
 </div>
+    <div id="target" hidden>
+<?php
 
-  <div class="footer">
-    <footer>
-      <ul class="foot">
-          <li class="foot">
-              <a class="info">Career Opportunities</a>
-              <a class="info">Volunteers</a>
-              <a class="info">Employees</a>
-              <a class="info">Financial Assistance</a>
-              <a class="info">Contact  Us</a>
-              <a class="info">HIPAA and Privacy</a>
-              <a class="info">Language Assistance</a>
-              <a class="info"> 740 E King Street Lancaster, PA | 24-hour Switchboard: 717-777-7777</address>
-          <div>
-              <span>
-                <a href="facebook.com"><img class="icon" src="icons/iconfinder_2018_social_media_popular_app_logo_facebook_3225194.svg" alt=""></a>
-              </span>
-              <span>
-                <a href=""><img class="icon" src="icons/iconfinder_2018_social_media_popular_app_logo_instagram_3225191.svg" alt=""></a>
-              </span>
-              <span>
-                <a href=""><img class="icon" src="icons/iconfinder_2018_social_media_popular_app_logo_linkedin_3225190.svg" alt=""></a>
-              </span>
-              <span>
-                <a href=""><img class="icon" src="icons/iconfinder_2018_social_media_popular_app_logo_pinterest_3225188.svg" alt=""></a>
-              </span>
-              <span>
-                <a href=""><img class="icon" src="icons/iconfinder_2018_social_media_popular_app_logo_twitter_3225183.svg" alt=""></a>
-              </span>
-              <span>
-                <a href=""><img class="icon" src="icons/iconfinder_2018_social_media_popular_app_logo_youtube_3225180.svg" alt=""></a>
-              </span>
-          </div>
-  </footer>
-</div>
+  foreach($jsUsers as $key => $value){
+    echo $value . "  ";
+  }
 
+
+?>
+    </div>
+<?php
+echo "
 <script>
-function yesnoCheck(that) {
-    if (that.value == "") {
-
-    } else {
-
+  let target = document.getElementById('target').innerText.split(' ');
+  let input = document.getElementById('id');
+  input.addEventListener('blur', (event) =>{
+    let Pname = document.getElementById('name');
+    if(target.includes(input.value)){
+      for(let i=0; i<target.length; i++){
+        if(input.value == target[i]){
+          Pname.value = target[i+1] + ' ' + target[i+2];
+        }
+      }
     }
-}
+  });
 </script>
-  </body>
+"
+?>
 
+<?php require('../footer.php') ?>
+  </body>
 </html>
