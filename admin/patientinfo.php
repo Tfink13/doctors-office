@@ -4,6 +4,10 @@
 <?php
 include '../db/db.php';
 session_start();
+$date_err = "";
+$group_err = "";
+ $pat_err = "";
+
 if($_SESSION['loggedin'] = True && $_SESSION['role'] == 'Admin') {
 
 } else {
@@ -37,53 +41,66 @@ foreach ($users as $key => $value) {
   }
 }
 
-if(empty(trim($_POST["group"]))){
-    $group_err = "Please enter a group";
-} else {
+
+
+if ((isset($_POST['sub']))) {
+  // $date = new DateTime($_POST['adDate']);
+  // $result = $date->format('Y-m-d');
+  // echo $result;
+  $date = $_POST['adDate'];
+  $pat = $_POST['id'];
   $group = $_POST['group'];
-}
+  
 
-if(empty(trim($_POST["date"]))){
-    $date_err = "Please enter a date.";
-} else {
-  $date = $_POST['date'];
-}
-
-
-if (isset(($_POST['sub']))) {
-
-  if(empty($group_err) && empty($admission_err)){
-
-      // Prepare an insert statement
-      $sql = "INSERT INTO users (role, fName, lName, email, phone, password, dob) VALUES (?, ?, ?, ?, ?, ?, ?)";
-
-      if($stmt = mysqli_prepare($conn, $sql)){
-          // Bind variables to the prepared statement as parameters
-          mysqli_stmt_bind_param($stmt, "sssssss", $param_role, $param_fName, $param_lName, $param_email, $param_phone, $param_password, $param_dob);
-
-          // Set parameters
-          $param_role = $role;
-          $param_fName = $fName;
-          $param_lName = $fName;
-          $param_email = $email;
-          $param_phone = $phone;
-          $param_password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
-          $param_dob = $dob;
-
-          // Attempt to execute the prepared statement
-          if(mysqli_stmt_execute($stmt)){
-              // Redirect to login page
-              header("location: http://localhost/doctors-office/");
-          } else{
-              echo "Something went wrong. Please try again later.";
-          }
-      }
-
-      // Close statement
-      mysqli_stmt_close($stmt);
+  if(empty(trim($_POST["id"]))){
+      $pat_err = "Please enter a group";
+  } else {
+    $pat = $_POST['id'];
   }
 
+  if(empty(trim($_POST["group"]))){
+      $group_err = "Please enter a group";
+  } else {
+    $group = $_POST['group'];
+  }
+  if(empty(trim($_POST['adDate']))) {
+    $date_err = "Please enter a date";
+  } else {
+    $date = $_POST['adDate'];
+  }
+
+
+  if(empty($group_err) && empty($date_err) && empty($pat_err)){
+    $sql = "UPDATE patients SET `groups` = ?, `admission_date` = ? WHERE `patient_id` = ?;";
+    if($stmt = mysqli_prepare($conn, $sql)){
+        // Bind variables to the prepared statement as parameters
+        mysqli_stmt_bind_param($stmt, "sss", $param_group, $param_date, $param_idd);
+
+        // Set parameters
+        $param_group = $group;
+        $param_date = $date;
+        $param_idd = $pat;
+
+        // Attempt to execute the prepared statement
+        if(mysqli_stmt_execute($stmt)){
+            /* store result */
+            mysqli_stmt_store_result($stmt);
+
+            if(mysqli_stmt_num_rows($stmt) != 1){
+                $patient_err = "That patient does not exist";
+            } else{
+                $email = trim($_POST["email"]);
+            }
+        } else{
+            echo "Oops! Something went wrong. Please try again later.";
+        }
+    }
+    // Close statement
+    mysqli_stmt_close($stmt);
 }
+}
+
+
 
 
 
@@ -117,11 +134,17 @@ if (isset(($_POST['sub']))) {
 
     <div class="col-3 right">
       <div class="regform">
-    <form action="" method="post" accept-charset="utf-8">
+    <form  method="post" accept-charset="utf-8">
       <label>Patient Id: <input type="text" value="" name="id" id="id"/></label>
+      <span><?php echo $pat_err; ?></span><br>
       <label>Group: <input type="text" value="" name="group" id="group"/></label>
-      <label>Admission Date: <input type="text" value="" name="date" id="date"/></label>
+      <span><?php echo $group_err; ?></span><br>
+
+      <label>Admission Date:</label>
+      <input type="date" name="adDate" id="date">
+
       <label>Patient Name:  <input type="text" value="" name="name" id="name"/></label>
+
       <button type="submit" name="sub">OK</button>
       <button type="submit" name="cancel">Cancel</button>
 
