@@ -34,6 +34,7 @@ if (isset(($_POST['logout']))) {
           <a href="appointments.php"><li>Appointments</li></a>
           <a href="employees.php"><li>Employees</li></a>
           <a href="report.php"><li>Report</li></a>
+          <a href="payment.php"><li>Payment</li></a>
       </div>
       </div>
       <form class="x" method="post">

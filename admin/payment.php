@@ -1,7 +1,8 @@
 <?php
 session_start();
 
-if($_SESSION['loggedin'] = True && $_SESSION['role'] == 'Patient') {
+// belongs in admin role
+if($_SESSION['loggedin'] = True && $_SESSION['role'] == 'Admin') {
 
 } else {
   header("Location: http://localhost/doctors-office/");
@@ -23,7 +24,12 @@ if (isset(($_POST['logout']))) {
       <div class="dropdown menu">
         <button class="dropbtn">Menu</button>
         <div class="dropdown-content">
-          <a href="patienthome.php"><li>Home</li></a>
+          <a href="adminhome.php"><li>Home</li></a>
+          <a href="patientinfo.php"><li>Patient Info</li></a>
+          <a href="patientsearch.php"><li>Patient Search</li></a>
+          <a href="appointments.php"><li>Appointments</li></a>
+          <a href="employees.php"><li>Employees</li></a>
+          <a href="report.php"><li>Report</li></a>
           <a href="payment.php"><li>Payment</li></a>
       </div>
       </div>
@@ -41,7 +47,6 @@ if (isset(($_POST['logout']))) {
         <div class="a">
           <p>$10 per day</p>
           <p>$50 per appointment</p>
-          <p>$5 for your monthly subscription</p>
         </div>
       </div>
 

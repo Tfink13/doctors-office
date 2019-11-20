@@ -47,11 +47,11 @@ if (isset(($_POST['logout']))) {
       <p>Table with just comment | Morn med | Afternoon med | Afternoon med |</p>
     </table>
 
-  <form class="" action="index.html" method="post">
+  <form class="" action="" method="post">
     <button type="submit" name="button">OK</button>
     <button type="submit" name="button">Cancel</button>
   </form>
-    </div>
+  </div>
 
 
     <?php require "../footer.php" ?>
