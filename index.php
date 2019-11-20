@@ -1,6 +1,6 @@
 <?php
 
-require 'db/db_connect.php';
+include 'db/db_connect.php';
 
 $email = $password = "";
 $username_err = $password_err = "";
@@ -15,7 +15,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     } else{
         $email = trim($_POST["email"]);
     }
-
     // Check if password is empty
     if(empty(trim(@$_POST["password"]))){
         $password_err = "Please enter your password.";
@@ -65,9 +64,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             } elseif ($role == 'Doctor') {
                               header("Location: doctor/home.php");
                             } elseif ($role == 'Family Member') {
-                              header("Location: familyhome.php");
+                              header("Location: family_members/home.php");
                             } elseif ($role == 'Supervisor') {
-                              header("Location: superhome.php");
+                              header("Location: supervisor/newroster.php");
                             } elseif ($role == 'Caregiver') {
                               header("Location: caregiver/home.php");
                             } elseif ($role == 'Admin') {
@@ -108,7 +107,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <meta charset="utf-8">
     <title></title>
   </head>
-<body>
+<body onLoad="noBack();" onpageshow="if (event.persisted) noBack();" onUnload="">
 
 <div class="header">
   <div class="dropdown menu">
@@ -116,7 +115,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <div class="dropdown-content">
       <a href="#"><li>About</li></a>
       <a href="#"><li>Contact</li></a>
-      <a href="roster.php"><li>Roster</li></a>
     </div>
   </div>
   <h1>Doctor Josh </h1>
@@ -155,7 +153,50 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
   </div>
 </div>
 
-<?php require "footer.php" ?>
+<div class="footer">
+  <footer>
+    <ul class="foot">
+        <li class="foot">
+            <a class="info">Career Opportunities</a>
+            <a class="info">Volunteers</a>
+            <a class="info">Employees</a>
+            <a class="info">Financial Assistance</a>
+            <a class="info">Contact  Us</a>
+            <a class="info">HIPAA and Privacy</a>
+            <a class="info">Language Assistance</a>
+            <a class="info"> 740 E King Street Lancaster, PA | 24-hour Switchboard: 717-777-7777</address>
+        <div>
+            <span>
+              <a href="facebook.com"><img class="icon" src="icons/iconfinder_2018_social_media_popular_app_logo_facebook_3225194.svg" alt=""></a>
+            </span>
+            <span>
+              <a href=""><img class="icon" src="icons/iconfinder_2018_social_media_popular_app_logo_instagram_3225191.svg" alt=""></a>
+            </span>
+            <span>
+              <a href=""><img class="icon" src="icons/iconfinder_2018_social_media_popular_app_logo_linkedin_3225190.svg" alt=""></a>
+            </span>
+            <span>
+              <a href=""><img class="icon" src="icons/iconfinder_2018_social_media_popular_app_logo_pinterest_3225188.svg" alt=""></a>
+            </span>
+            <span>
+              <a href=""><img class="icon" src="icons/iconfinder_2018_social_media_popular_app_logo_twitter_3225183.svg" alt=""></a>
+            </span>
+            <span>
+              <a href=""><img class="icon" src="icons/iconfinder_2018_social_media_popular_app_logo_youtube_3225180.svg" alt=""></a>
+            </span>
+        </div>
+</footer>
+
+
+
+<script>
+
+history.pushState(null, null, document.URL);
+window.addEventListener('popstate', function () {
+    history.pushState(null, null, document.URL);
+});
+
+</script>
 
 
   </body>
