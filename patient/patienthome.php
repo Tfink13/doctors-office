@@ -6,7 +6,10 @@ if($_SESSION['loggedin'] = True && $_SESSION['role'] == 'Patient') {
 } else {
   header("Location: http://localhost/doctors-office/");
 }
-
+if (isset(($_POST['logout']))) {
+  session_destroy();
+  header("Location: http://localhost/doctors-office");
+}
 
  ?>
 
@@ -24,13 +27,13 @@ if($_SESSION['loggedin'] = True && $_SESSION['role'] == 'Patient') {
          <button class="dropbtn">Menu</button>
          <div class="dropdown-content">
            <a href="patienthome.php"><li>Home</li></a>
-           <a href="#"><li>About</li></a>
-           <a href="#"><li>Contact</li></a>
+           <a href="payment.php"><li>Payment</li></a>
        </div>
        </div>
        <form class="x" action="../logout.php" method="post">
          <button class="x" type="submit" name="logout"><li style="list-style: none;">Logout</li></button>
        </form>
+       <h1>Patient Homepage</h1>
      </div>
 
 
