@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-include '../db/db.php';
+require '../db/db.php';
 $user_id_err = "";
 
 // authenticating the user in the admin
@@ -52,7 +52,7 @@ if (isset(($_POST['logout']))) {
  if (isset(($_POST['update']))) {
 
    if(empty(trim(@$_POST["user"]))){
-       $username_err = "Enter user id to apporve application.";
+       $username_err = "Enter user id to approve application.";
    } else{
        $user = trim($_POST["user"]);
    }
@@ -95,7 +95,14 @@ if (isset(($_POST['logout']))) {
        foreach ($row as $field => $value) {
          echo "<td border='1'>" . $value . "</td>";
          }
+         echo "<td>";
+         echo "<form>
+                <input type='submit' name='Approve' value='approve'>
+                <input type='submit' name='Reject' value='reject'>
+                </form>";
+         echo "</td>";
          echo "</tr>";
+      
      }
      echo "</table>";
    }
@@ -105,5 +112,7 @@ if (isset(($_POST['logout']))) {
       <input class="update" type="text" name="user" value="">
       <button type="submit" name="update">UPDATE</button>
     </form>
+
+    <?php require "../footer.php" ?>
   </body>
 </html>

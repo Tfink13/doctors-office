@@ -35,10 +35,10 @@ if (isset(($_POST['logout']))) {
           <a href="payment.php"><li>Payment</li></a>
       </div>
       </div>
+      <h1>Patient Search</h1>
       <form class="x" method="post">
         <button class="x" type="submit" name="logout"><li style="list-style: none;">Logout</li></button>
       </form>
-      <h1>Patient Search</h1>
     </div>
 
 

@@ -270,7 +270,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             <select onchange="yesnoCheck(this);" class="role" name="role">
               <option>Doctor</option>
               <option value="Patient">Patient</option>
-              <option>Family Member</option>
+              <option>Family Memember</option>
               <option>Supervisor</option>
               <option>Caregiver</option>
               <option>Admin</option>
@@ -333,7 +333,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     </div>
 
 
-    <?php require "footer.php"; ?>
+    <?php require "footer.php"; ?>  
 
     <script>
 
