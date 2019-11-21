@@ -1,3 +1,27 @@
+<?php
+require 'db/db.php';
+///get the current date 
+if (!(empty($_POST["date"]))) {
+
+  $date = $_POST["date"];
+  ///post date to query to display all roster table entries
+  $sql = "SELECT * FROM roster WHERE date ='$date'
+  ";
+  $result = mysqli_query($conn, $sql);
+  
+  while ($row = mysqli_fetch_row($result)) 
+    print_r($row);
+    foreach ($row as $i => $item) {
+      echo "SELECT fName, lName FROM users WHERE user_id = $item[i]";
+      // $names = mysqli_query($conn, $sql)
+      // print_r($names);
+    }
+
+}
+
+?>
+ 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,7 +46,7 @@
 </div>
 
 <div style='margin: auto;'> 
-<form action='#' method='GET' style='margin: auto;'>
+<form action='#' method='POST' style='margin: auto;'>
 <input type="date" name="date" style="margin: auto;">
 <input style='margin:auto;' type="submit" value="Check">
 </form>
@@ -38,12 +62,15 @@
         <td border='1'>Caregiver 4</td>
 </tr>
     <tr border='1'>
-        <td border='1'>Mr Tyler</td>
-        <td border='1'>Dr Josh</td>
+      <?php 
+        
+      ?>
+        <!-- <td border='1'></td>
+        <td border='1'></td>
         <td border='1'>John</td>
         <td border='1'>Smith</td>    
         <td border='1'>Greg</td>
-        <td border='1'>Annah</td>
+        <td border='1'>Annah</td> -->
 </tr>
 </table>
 

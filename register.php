@@ -270,7 +270,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             <select onchange="yesnoCheck(this);" class="role" name="role">
               <option>Doctor</option>
               <option value="Patient">Patient</option>
-              <option>Family Memember</option>
+              <option>Family Member</option>
               <option>Supervisor</option>
               <option>Caregiver</option>
               <option>Admin</option>
