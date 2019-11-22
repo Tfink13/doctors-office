@@ -2,7 +2,6 @@
 session_start();
 
 require '../db/db.php';
-$user_id_err = "";
 
 // authenticating the user in the admin
 if($_SESSION['loggedin'] = True && $_SESSION['role'] == 'Admin') {
@@ -15,7 +14,7 @@ if (isset(($_POST['logout']))) {
   session_destroy();
   header("Location: http://localhost/doctors-office");
 }
- ?>
+?>
 
  <!DOCTYPE html>
  <html lang="en" dir="ltr">
@@ -46,72 +45,34 @@ if (isset(($_POST['logout']))) {
           <h1>Admin Homepage</h1>
      </div>
 
+      <?php 
+        $sql = "SELECT fName, lName, approved FROM users WHERE approved=0";
+        $user_query = mysqli_query($conn, $sql);
+        $user_info = mysqli_fetch_all($user_query);
+        print_r($user_info);
+      ?>
 
- <?php
+      <table>
+        <tr>
+          <td>
+            Name
+          </td>
+          <td>
+            Name
+          </td>
+          <td>
+            Name
+          </td>
+        </tr>
+      </table>
 
- if (isset(($_POST['update']))) {
 
-   if(empty(trim(@$_POST["user"]))){
-       $username_err = "Enter user id to approve application.";
-   } else{
-       $user = trim($_POST["user"]);
-   }
 
-   $sql = "UPDATE users
-   SET approved = '1'
-   WHERE user_id = $user;";
 
-   mysqli_query($conn, $sql);
 
-   $ssql = "SELECT user_id, fName, Lname, email, approved FROM users WHERE approved = '0';";
-   $result = mysqli_query($conn, $ssql);
 
-   if ($result) {
-     echo "<p class='users'>Applicants</p>";
-     echo "<table border='1' background-color: #0099cc>";
-     while ($row = mysqli_fetch_row($result)) {
-       echo "<tr border='1'>";
-       foreach ($row as $field => $value) {
-         echo "<td border='1px solid black;>" . $value . "</td>";
-         }
 
-         echo "</tr>";
-         echo "<button type='submit' name='patient_sub'>Submit</button>";
-     }
-     echo "</table>";
-   }
- }
-
- if($_SERVER["REQUEST_METHOD"] == "GET"){
-
-   $ssql = "SELECT user_id, fName, Lname, email, approved FROM users WHERE approved = '0';";
-   $result = mysqli_query($conn, $ssql);
-
-   if ($result) {
-     echo "<p class='users'>Applicants</p>";
-     echo "<table border='1' background-color: #0099cc>";
-     while ($row = mysqli_fetch_row($result)) {
-       echo "<tr border='1'>";
-       foreach ($row as $field => $value) {
-         echo "<td border='1'>" . $value . "</td>";
-         }
-         echo "<td>";
-         echo "<form>
-                <input type='submit' name='Approve' value='approve'>
-                <input type='submit' name='Reject' value='reject'>
-                </form>";
-         echo "</td>";
-         echo "</tr>";
-      
-     }
-     echo "</table>";
-   }
- }
-?>
-    <form style="margin: auto;"class="update" method="post">
-      <input class="update" type="text" name="user" value="">
-      <button type="submit" name="update">UPDATE</button>
-    </form>
+ 
 
     <?php require "../footer.php" ?>
   </body>
