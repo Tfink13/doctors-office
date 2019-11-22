@@ -8,8 +8,8 @@ if (!(empty($_POST["date"])))
   if (!empty($date)) {
   $sql = "SELECT * FROM roster WHERE date ='$date'";
   $roster_user_ids = mysqli_query($conn, $sql);
-  
     $user_user_ids = mysqli_fetch_row($roster_user_ids);
+    $patient_group = $user_user_ids[7];
   }
 ?>
  
@@ -46,6 +46,7 @@ if (!(empty($_POST["date"])))
 
 <table border='1' background-color: #0099cc>
     <tr border='1'>
+        <td border='1'>Patient Group</td>
         <td border='1'>Supervisor</td>
         <td border='1'>Doctor</td>
         <td border='1'>Caregiver 1</td>
@@ -55,21 +56,17 @@ if (!(empty($_POST["date"])))
 </tr>
     <tr border='1'>
       <?php 
-      if (!empty($date)) {
-          for ($i = 1; $i <= 6; $i++) {
-            $sql = "SELECT fName, lName FROM users where user_id='$user_user_ids[$i]'";
-            $usernames_query = mysqli_query($conn, $sql);
-            $usernames_row = mysqli_fetch_row($usernames_query);
-            echo "<td>".$usernames_row[0].' '.$usernames_row[1]."</td>";
-          }
-      }
+        
+        if (!empty($date)) {
+            echo "<td>".$patient_group."</td>";
+            for ($i = 1; $i <= 6; $i++) {
+              $sql = "SELECT fName, lName FROM users where user_id='$user_user_ids[$i]'";
+              $usernames_query = mysqli_query($conn, $sql);
+              $usernames_row = mysqli_fetch_row($usernames_query);
+              echo "<td>".$usernames_row[0].' '.$usernames_row[1]."</td>";
+            }
+        }
       ?>
-        <!-- <td border='1'></td>
-        <td border='1'></td>
-        <td border='1'>John</td>
-        <td border='1'>Smith</td>    
-        <td border='1'>Greg</td>
-        <td border='1'>Annah</td> -->
 </tr>
 </table>
 
