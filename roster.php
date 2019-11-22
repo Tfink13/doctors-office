@@ -1,24 +1,16 @@
 <?php
 require 'db/db.php';
 ///get the current date 
-if (!(empty($_POST["date"]))) {
+if (!(empty($_POST["date"]))) 
 
   $date = $_POST["date"];
   ///post date to query to display all roster table entries
-  $sql = "SELECT * FROM roster WHERE date ='$date'
-  ";
-  $result = mysqli_query($conn, $sql);
+  if (!empty($date)) {
+  $sql = "SELECT * FROM roster WHERE date ='$date'";
+  $roster_user_ids = mysqli_query($conn, $sql);
   
-  while ($row = mysqli_fetch_row($result)) 
-    print_r($row);
-    foreach ($row as $i => $item) {
-      echo "SELECT fName, lName FROM users WHERE user_id = $item[i]";
-      // $names = mysqli_query($conn, $sql)
-      // print_r($names);
-    }
-
-}
-
+    $user_user_ids = mysqli_fetch_row($roster_user_ids);
+  }
 ?>
  
 
@@ -63,7 +55,14 @@ if (!(empty($_POST["date"]))) {
 </tr>
     <tr border='1'>
       <?php 
-        
+      if (!empty($date)) {
+          for ($i = 1; $i <= 6; $i++) {
+            $sql = "SELECT fName, lName FROM users where user_id='$user_user_ids[$i]'";
+            $usernames_query = mysqli_query($conn, $sql);
+            $usernames_row = mysqli_fetch_row($usernames_query);
+            echo "<td>".$usernames_row[0].' '.$usernames_row[1]."</td>";
+          }
+      }
       ?>
         <!-- <td border='1'></td>
         <td border='1'></td>
