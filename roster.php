@@ -5,7 +5,6 @@ require 'db/db.php';
 ///get the current date from form
   if (!empty($_GET["date"])) {
     $date = $_GET["date"];
-    echo $date;
   }
 
   ///post date to query to display all roster table entries, which are all foreign keys for the users table
