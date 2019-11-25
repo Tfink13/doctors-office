@@ -46,33 +46,55 @@ if (isset(($_POST['logout']))) {
      </div>
 
       <?php 
-        $sql = "SELECT fName, lName, approved FROM users WHERE approved=0";
+        $sql = "SELECT user_id, role, fName, lName, email FROM users WHERE approved=0";
         $user_query = mysqli_query($conn, $sql);
         $user_info = mysqli_fetch_all($user_query);
-        print_r($user_info);
+        foreach ($user_info as $key => $line) {
+          foreach ($line as $key => $entry) {
+      
+          }
+        }
+
+        if (!empty($_POST["approve"])) {
+          $user_id = $_POST["approve"];
+          $sql = "UPDATE users SET approved=1 WHERE user_id=$user_id";
+          $query = mysqli_query($conn, $sql);
+          echo "<meta http-equiv='refresh' content='0'>";
+        }
+
+        if (!empty($_POST["deny"])) {
+          $user_id = $_POST["deny"];
+          $sql = "DELETE FROM users WHERE user_id=$user_id";
+          $query = mysqli_query($conn, $sql);
+          echo "<meta http-equiv='refresh' content='0'>";
+        }
+
+
       ?>
 
-      <table>
+    <table>
         <tr>
-          <td>
-            Name
-          </td>
-          <td>
-            Name
-          </td>
-          <td>
-            Name
-          </td>
+          <td>User ID</td>
+          <td>Role</td>
+          <td>First Name</td>
+          <td>Last Name</td>
+          <td>Email</td>
         </tr>
-      </table>
+        <?php
+          foreach ($user_info as $key => $line) {
+            echo "<tr>";
+           
+            foreach ($line as $key => $entry) {
+              echo "<td>";
+              echo $entry;
+              echo "</td>";
+            }
+            echo "<td><form action='#' method='POST'><button name='approve' value='$line[0]'>Approve</button></form></td>";
+            echo "<td><form action='#' method='POST'><button name='deny' value='$line[0]'>Deny</button></form></td>";
 
-
-
-
-
-
-
- 
+          }
+        ?>
+    </table>
 
     <?php require "../footer.php" ?>
   </body>
