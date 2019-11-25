@@ -1,15 +1,18 @@
 <?php
 require 'db/db.php';
-///get the current date 
-if (!(empty($_POST["date"]))) 
 
-  $date = $_POST["date"];
-  ///post date to query to display all roster table entries
+
+///get the current date from form
+  if (!empty($_GET["date"])) {
+    $date = $_GET["date"];
+    echo $date;
+  }
+
+  ///post date to query to display all roster table entries, which are all foreign keys for the users table
   if (!empty($date)) {
   $sql = "SELECT * FROM roster WHERE date ='$date'";
   $roster_user_ids = mysqli_query($conn, $sql);
     $user_user_ids = mysqli_fetch_row($roster_user_ids);
-    $patient_group = $user_user_ids[7];
   }
 ?>
  
@@ -38,7 +41,7 @@ if (!(empty($_POST["date"])))
 </div>
 
 <div style='margin: auto;'> 
-<form action='#' method='POST' style='margin: auto;'>
+<form action='#' method='GET' style='margin: auto;'>
 <input type="date" name="date" style="margin: auto;">
 <input style='margin:auto;' type="submit" value="Check">
 </form>
@@ -46,7 +49,6 @@ if (!(empty($_POST["date"])))
 
 <table border='1' background-color: #0099cc>
     <tr border='1'>
-        <td border='1'>Patient Group</td>
         <td border='1'>Supervisor</td>
         <td border='1'>Doctor</td>
         <td border='1'>Caregiver 1</td>
@@ -57,9 +59,10 @@ if (!(empty($_POST["date"])))
     <tr border='1'>
       <?php 
         
+
         if (!empty($date)) {
-            echo "<td>".$patient_group."</td>";
             for ($i = 1; $i <= 6; $i++) {
+              // do a SELECT for each user_id foreign key returned by the roster
               $sql = "SELECT fName, lName FROM users where user_id='$user_user_ids[$i]'";
               $usernames_query = mysqli_query($conn, $sql);
               $usernames_row = mysqli_fetch_row($usernames_query);
