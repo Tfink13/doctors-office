@@ -35,7 +35,6 @@ div {
 
 div.col-3 {
   width: 50%;
-
 }
 
 div.footer {
@@ -46,8 +45,8 @@ div.footer {
   font-size: 12px;
   padding: 15px;
   position: fixed;
-    width: 99%;
-    bottom:  0px;
+  width: 99%;
+  bottom: 0px;
 }
 
 div.header {
@@ -61,7 +60,6 @@ div.header {
 form.update {
   margin-top: 30px;
   text-align: center;
-
 }
 
 form.login {
@@ -87,6 +85,7 @@ input {
   border-top-right-radius: 7px;
   outline: none;
 }
+
 input.update {
   margin: auto;
 }
@@ -188,10 +187,12 @@ textarea:focus, input:focus, input[type]:focus, .uneditable-input:focus {
 .dropdown:hover .dropbtn {
   background-color: #3e8e41;
 }
+
 .flex {
   display: flex;
   left: 0px;
 }
+
 /* Seperating different sections on the page */
 .aside {
   height: 370.9px;
@@ -283,17 +284,35 @@ div div.regform {
 }
 
 table {
+  text-align: center;
   background-color: #32b5e5;
-    margin: auto;
-    border: 3px solid;
-    margin-top: 30px;
-    border-radius: 9px;
-    margin-bottom: 30px;
-    overflow: scroll;
+  margin: auto;
+  border: 2px solid;
+  margin-top: 30px;
+  border-radius: 9px;
+  margin-bottom: 30px;
+  overflow: scroll;
+}
+
+td {
+  width: 55px;
+  height: 40px;
+}
+
+td.col {
+  border-bottom: 3px solid black;
+  width: 68px;
+
 }
 
 p.users {
   text-align: center;
   font-family: monospace;
   font-size: 30px;
+}
+
+div#table-scroll {
+  height:300px;
+  overflow:auto;
+  margin-top:20px;
 }

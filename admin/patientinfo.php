@@ -23,12 +23,11 @@ if (isset(($_POST['logout']))) {
 
 $sql = "SELECT patient_id, u.fName, u.lName FROM patients p JOIN users u ON p.user_id = u.user_id;";
 $results = mysqli_query($conn, $sql);
+
 $users = [];
 $jsUsers= [];
 #echo gettype($users);
 $resultCheck = mysqli_num_rows($results);
-$i = 0;
-
 if($resultCheck>0)
     while($row = mysqli_fetch_assoc($results))
         {
@@ -44,13 +43,10 @@ foreach ($users as $key => $value) {
 
 
 if ((isset($_POST['sub']))) {
-  // $date = new DateTime($_POST['adDate']);
-  // $result = $date->format('Y-m-d');
-  // echo $result;
   $date = $_POST['adDate'];
   $pat = $_POST['id'];
   $group = $_POST['group'];
-  
+
 
   if(empty(trim($_POST["id"]))){
       $pat_err = "Please enter a group";
@@ -122,7 +118,8 @@ if ((isset($_POST['sub']))) {
           <a href="patientinfo.php"><li>Patient Info</li></a>
           <a href="patientsearch.php"><li>Patient Search</li></a>
           <a href="appointments.php"><li>Appointments</li></a>
-          <a href="employees.php"><li>Employees</li></a>
+          <a href="employees.php"><li>Update Salaries</li></a>
+          <a href="addemployees.php"><li>Add Employees</li></a>
           <a href="report.php"><li>Report</li></a>
       </div>
       </div>
@@ -135,14 +132,14 @@ if ((isset($_POST['sub']))) {
     <div class="col-3 right">
       <div class="regform">
     <form  method="post" accept-charset="utf-8">
-      <label>Patient Id: <input type="text" value="" name="id" id="id"/></label>
+      <label>Patient Id: </label>
+      <input type="text" value="" name="id" id="id"/>
       <span><?php echo $pat_err; ?></span><br>
-      <label>Group: <input type="text" value="" name="group" id="group"/></label>
+      <label>Group:</label>
+      <input type="text" value="" name="group" id="group"/>
       <span><?php echo $group_err; ?></span><br>
-
       <label>Admission Date:</label>
       <input type="date" name="adDate" id="date">
-
       <label>Patient Name:  <input type="text" value="" name="name" id="name"/></label>
 
       <button type="submit" name="sub">OK</button>
@@ -150,6 +147,7 @@ if ((isset($_POST['sub']))) {
 
     </form>
   </div>
+
 </div>
     <div id="target" hidden>
 <?php
@@ -161,6 +159,7 @@ if ((isset($_POST['sub']))) {
 
 ?>
     </div>
+
 <?php
 echo "
 <script>

@@ -30,7 +30,8 @@ if (isset(($_POST['logout']))) {
           <a href="patientinfo.php"><li>Patient Info</li></a>
           <a href="patientsearch.php"><li>Patient Search</li></a>
           <a href="appointments.php"><li>Appointments</li></a>
-          <a href="employees.php"><li>Employees</li></a>
+          <a href="employees.php"><li>Update Salaries</li></a>
+          <a href="addemployees.php"><li>Add Employees</li></a>
           <a href="report.php"><li>Report</li></a>
       </div>
       </div>

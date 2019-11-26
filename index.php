@@ -68,7 +68,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             } elseif ($role == 'Supervisor') {
                               header("Location: supervisor/newroster.php");
                             } elseif ($role == 'Caregiver') {
-                              header("Location: caregiverhome.php");
+                              header("Location: caregiver/home.php");
                             } elseif ($role == 'Admin') {
                               header("Location: admin/adminhome.php");
                             } else {

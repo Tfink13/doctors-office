@@ -13,7 +13,15 @@ if (isset(($_POST['logout']))) {
   session_destroy();
   header("Location: http://localhost/doctors-office");
 }
+
+$sname = "SELECT fName, lName, role FROM users WHERE role = 'Supervisor';";
+$result = mysqli_query($conn, $sname);
+
+$dname = "SELECT fName, lName, role FROM users WHERE role = 'Doctor';";
+$res = mysqli_query($conn, $dname);
  ?>
+
+ 
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -40,30 +48,46 @@ if (isset(($_POST['logout']))) {
         <form method="post">
           <div>
             <label class="tb">Date</label>
-            <input class="tb" type="text" name="" required>
+            <input class="tb" type="date" name="date" required>
           </div>
           <div>
-            <label class="tb">Supervisor</label>
-            <input class="tb" type="text" name="supername" required>
+            <label class="tb">Supervisor:</label>
+            <select class="" name="">
+              <?php while($row = mysqli_fetch_assoc($result))
+              {
+                 $names = $row['fName']." " . $row['lName']." , ";
+                 echo "<option id='{$row['fName']} {$row['lName']}'>{$row['fName']} {$row['fName']}</option>";
+              }
+              ?>
+            </select>
           </div>
           <div>
-            <label class="tb">Doctor</label>
-            <input class="tb" type="text" name="doc" required>
+            <label class="tb">Doctor:</label>
+            <select class="" name="">
+              <?php while($row = mysqli_fetch_assoc($res))
+              {
+                 $names = $row['fName']." " . $row['lName']." , ";
+                 echo "<option id='{$row['fName']} {$row['lName']}'>{$row['fName']} {$row['fName']}</option>";
+              }
+              ?>
+            </select>
+
+
           </div>
           <div>
-            <label class="tb">Caregiver 1</label>
+            <label class="tb">Caregiver Group 1:</label>
             <input class="tb" type="text" name="c1" required>
           </div>
           <div>
-            <label class="tb">Caregiver 2</label>
+            <label class="tb">Caregiver Group 2:</label>
             <input class="tb" type="text" name="c2" required>
           </div>
           <div>
-            <label class="tb">Caregiver 3</label>
+            <label class="tb">Caregiver Group 3:</label>
             <input class="tb" type="text" name="c3" required>
           </div>
           <div>
-            <label class="tb">Caregiver 4</label>
+            <label class="tb">Caregiver Groups 4:</label>
             <input class="tb" type="text" name="c4" required>
           </div>
       </form>

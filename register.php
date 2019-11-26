@@ -95,6 +95,7 @@ if (isset(($_POST['sub']))) {
 
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
+
   //  check the three new nputs for patients
   if(empty(trim($_POST["familyCode"]))){
       $family_code_err = "Please enter a family code.";
