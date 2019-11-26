@@ -32,8 +32,6 @@ require 'db/db.php';
     <button class="dropbtn">Menu</button>
     <div class="dropdown-content">
         <a href="index.php"><li>Home</li></a>
-        <a href="#"><li>About</li></a>
-        <a href="#"><li>Contact</li></a>
     </div>
   </div>
   <h1>Doctor Josh </h1>

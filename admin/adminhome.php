@@ -26,7 +26,6 @@ if (isset(($_POST['logout']))) {
    <body>
 
      <div class="header">
-
        <div class="dropdown menu">
          <button class="dropbtn">Menu</button>
          <div class="dropdown-content">
@@ -37,13 +36,13 @@ if (isset(($_POST['logout']))) {
             <a href="employees.php"><li>Employees</li></a>
             <a href="report.php"><li>Report</li></a>
             <a href="payment.php"><li>Payment</li></a>
+            <a href="../roster.php"><li>Roster</li></a>
+            <button type="submit" form="logout" name="logout"><li>Logout</li></button>
+            <form id="logout" method="post"></form>
        </div>
      </div>
-     <form class="x" method="post">
-       <button class="x" type="submit" name="logout"><li style="list-style: none;">Logout</li></button>
-     </form>
-          <h1>Admin Homepage</h1>
-     </div>
+  </div>
+     
 
       <?php 
         $sql = "SELECT user_id, role, fName, lName, email FROM users WHERE approved=0";
@@ -68,7 +67,6 @@ if (isset(($_POST['logout']))) {
           $query = mysqli_query($conn, $sql);
           echo "<meta http-equiv='refresh' content='0'>";
         }
-
 
       ?>
 

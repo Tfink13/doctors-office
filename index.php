@@ -114,8 +114,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
   <div class="dropdown menu">
     <button class="dropbtn">Menu</button>
     <div class="dropdown-content">
-      <a href="#"><li>About</li></a>
-      <a href="#"><li>Contact</li></a>
       <a href="roster.php"><li>Roster</li></a>
     </div>
   </div>
