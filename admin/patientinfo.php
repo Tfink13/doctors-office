@@ -149,12 +149,6 @@ if ((isset($_POST['sub']))) {
     </form>
   </div>
 
-<<<<<<< HEAD
-<?php require "../footer.php" ?>
-<script>
-function yesnoCheck(that) {
-    if (that.value == "") {
-=======
 </div>
     <div id="target" hidden>
 <?php
@@ -162,7 +156,6 @@ function yesnoCheck(that) {
   foreach($jsUsers as $key => $value){
     echo $value . "  ";
   }
->>>>>>> origin/employees
 
 
 ?>
@@ -184,13 +177,9 @@ echo "
     }
   });
 </script>
-<<<<<<< HEAD
-</body>
-=======
 "
 ?>
 
 <?php require('../footer.php') ?>
   </body>
->>>>>>> origin/employees
 </html>
