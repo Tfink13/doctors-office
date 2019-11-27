@@ -15,6 +15,41 @@ if (isset(($_POST['logout']))) {
   session_destroy();
   header("Location: http://localhost/doctors-office");
 }
+//get today's date
+$current_date = date("Y-m-d");
+
+//echo $current_date.' ';
+//query for today's roster to get caregiver's current role
+$user_id = $_SESSION["id"];
+echo "user id is ".$user_id.' ';
+
+$sql = "SELECT date, caregiver_1, caregiver_2, caregiver_3, caregiver_4 FROM roster WHERE date = '$current_date'";
+
+//echo $sql. ' ';
+
+$result = mysqli_query($conn, $sql);
+
+
+if ($result) {
+  while ($row = mysqli_fetch_row($result)) {
+    foreach ($row as $field => $value) {
+      if ($value = $user_id) {
+        echo $value. ' ';
+      }
+    }
+  } 
+}
+
+
+
+
+
+// $sql = "SELECT schedule
+//   SET approved = '1'
+//   WHERE user_id = $user;";
+
+
+
 ?>
 
 <!DOCTYPE html>
