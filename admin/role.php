@@ -1,8 +1,10 @@
-<!-- Join patient -->
 <?php
 session_start();
-include '../db/db.php';
 
+include '../db/db.php';
+$user_id_err = "";
+
+// authenticating the user in the admin
 if($_SESSION['loggedin'] = True && $_SESSION['role'] == 'Admin') {
 
 } else {
@@ -14,6 +16,7 @@ if (isset(($_POST['logout']))) {
   header("Location: http://localhost/doctors-office");
 }
  ?>
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -23,6 +26,7 @@ if (isset(($_POST['logout']))) {
   </head>
   <body>
     <div class="header">
+
       <div class="dropdown menu">
         <button class="dropbtn">Menu</button>
         <div class="dropdown-content">
@@ -34,28 +38,15 @@ if (isset(($_POST['logout']))) {
           <a href="addemployees.php"><li>Add Employees</li></a>
           <a href="report.php"><li>Report</li></a>
       </div>
-      </div>
-      <h1>Admin Report</h1>
-      <form class="x" method="post">
-        <button class="x" type="submit" name="logout"><li style="list-style: none;">Logout</li></button>
-      </form>
+    </div>
+    <form class="x" method="post">
+      <button class="x" type="submit" name="logout"><li style="list-style: none;">Logout</li></button>
+    </form>
+         <h1>Add a new role</h1>
     </div>
 
-    <div class="col-3 right">
-      <div class="regform">
-        <form method="post">
-            <div class="">
-              <label for="">Date</label>
-              <input onchange="yesnoCheck(this);" type="text" name="p_id" value="">
-              <span>Error</span>
-            </div>
-            <button type="submit" name="ok">OK</button>
-            <button type="submit" name="cancel">Cancel</button>
-        </form>
-      </div>
-    </div>
 
-  <?php require "../footer.php" ?>
+    <?php require('../footer.php') ?>
 
   </body>
 </html>

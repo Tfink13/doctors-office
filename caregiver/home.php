@@ -1,10 +1,7 @@
 <?php
 session_start();
+include '../db/db.php';
 
-require '../db/db.php';
-$user_id_err = "";
-
-// authenticating the user in the admin
 if($_SESSION['loggedin'] = True && $_SESSION['role'] == 'Caregiver') {
 
 } else {
