@@ -4,7 +4,7 @@ session_start();
 require '../db/db.php';
 
 // authenticating the user in the admin
-if($_SESSION['loggedin'] = True && $_SESSION['role'] == 'Admin') {
+if($_SESSION['loggedin'] = True && $_SESSION['role'] == 'Admin' && $_SESSION['approved'] == 1) {
 
 } else {
   header("Location: http://localhost/doctors-office");

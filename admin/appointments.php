@@ -4,7 +4,7 @@ session_start();
 include '../db/db.php';
 
 
-if($_SESSION['loggedin'] = True && $_SESSION['role'] == 'Admin') {
+if($_SESSION['loggedin'] = True && $_SESSION['role'] == 'Admin' && $_SESSION['approved'] == 1) {
 
 } else {
   header("Location: http://localhost/doctors-office");
@@ -30,7 +30,7 @@ if($resultCheck>0)
         }
 #print_r($users);
 foreach ($users as $key => $value) {
-  foreach ($value as $Key => $Value){
+  foreach ($value as $key => $value){
     array_push($jsUsers, $Value);
   }
 }
@@ -73,7 +73,7 @@ foreach ($users as $key => $value) {
       <input type="text" name="id" id="id"/>
 
       <label>Date:</label>
-      <input type="text" name="date" id="group"/>
+      <input type="date" name="date" id="date"/>
 
       <label>Patient Name:</label>
       <input type="text" name="name" id="name"/>

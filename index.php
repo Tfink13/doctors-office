@@ -29,7 +29,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     // Validate credentials
     if(empty($username_err) && empty($password_err)){
         // Prepare a select statement
-        $sql = "SELECT user_id, fName, email, password, role FROM users WHERE email = ?";
+        $sql = "SELECT user_id, fName, email, password, role, approved FROM users WHERE email = ?";
 
         if($stmt = mysqli_prepare($conn, $sql)){
             // Bind variables to the prepared statement as parameters
@@ -46,7 +46,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 // Check if username exists, if yes then verify password
                 if(mysqli_stmt_num_rows($stmt) == 1){
                     // Bind result variables
-                    mysqli_stmt_bind_result($stmt, $user_id, $fName, $email, $hashed_password, $role);
+                    mysqli_stmt_bind_result($stmt, $user_id, $fName, $email, $hashed_password, $role, $approved);
                     if(mysqli_stmt_fetch($stmt)){
                         if(password_verify($password, $hashed_password)){
                             // Password is correct, so start a new session
@@ -58,6 +58,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             $_SESSION["id"] = $user_id;
                             $_SESSION["email"] = $email;
                             $_SESSION['role'] = $role;
+                            $_SESSION['approved'] = $approved;
                             print_r($_SESSION["loggedin"]);
 
                             if ($role == 'Patient') {

@@ -8,7 +8,7 @@ $date_err = "";
 $group_err = "";
  $pat_err = "";
 
-if($_SESSION['loggedin'] = True && $_SESSION['role'] == 'Admin') {
+if($_SESSION['loggedin'] = True && $_SESSION['role'] == 'Admin' && $_SESSION['approved'] == 1) {
 
 } else {
   header("Location: http://localhost/doctors-office");

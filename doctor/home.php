@@ -4,7 +4,7 @@ session_start();
 include '../db/db.php';
 
 
-if($_SESSION['loggedin'] = True && $_SESSION['role'] == 'Doctor') {
+if($_SESSION['loggedin'] = True && $_SESSION['role'] == 'Doctor' && $_SESSION['approved'] == 1) {
 
 } else {
   header("Location: http://localhost/doctors-office");

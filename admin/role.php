@@ -5,7 +5,7 @@ include '../db/db.php';
 $user_id_err = "";
 
 // authenticating the user in the admin
-if($_SESSION['loggedin'] = True && $_SESSION['role'] == 'Admin') {
+if($_SESSION['loggedin'] = True && $_SESSION['role'] == 'Admin' && $_SESSION['approved'] == 1) {
 
 } else {
   header("Location: http://localhost/doctors-office");

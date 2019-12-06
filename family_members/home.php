@@ -2,7 +2,7 @@
 session_start();
 include '../db/db.php';
 
-if($_SESSION['loggedin'] = True && $_SESSION['role'] == 'Family Member') {
+if($_SESSION['loggedin'] = True && $_SESSION['role'] == 'Family Member' && $_SESSION['approved'] == 1) {
 
 } else {
   header("Location: http://localhost/doctors-office");
